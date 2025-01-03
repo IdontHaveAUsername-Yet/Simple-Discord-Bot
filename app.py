@@ -1,11 +1,8 @@
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
+# Bot token (replace with your actual token)
+TOKEN = "YOUR_BOT_TOKEN_HERE"
 
 # Create a bot client with command prefix
 intents = discord.Intents.default()
