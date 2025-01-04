@@ -1,0 +1,53 @@
+    $ban:
+
+        Bans a user from the server. A reason can optionally be provided.
+
+        Example: $ban @User You violated the rules.
+
+    $kick:
+
+        Kicks a user from the server. A reason can optionally be provided.
+
+        Example: $kick @User You violated the rules.
+
+    $write:
+
+        Sends a message to a specific channel. The channel is specified by its ID.
+
+        Example: $write 123456789012345678 "Hello, this is a test message!"
+
+    $poll:
+
+        Creates a poll with a question and up to 10 options.
+
+        Example: $poll "Should we order pizza?" Yes No Maybe
+
+    $embed:
+
+        Sends a custom embed with a title, description, and optional color.
+
+        Example: $embed "Welcome!" "This is a welcome message." 0x00ff00
+
+    $mute:
+
+        Mutes a user by assigning the "Muted" role.
+
+        Example: $mute @User You violated the rules.
+
+    $unmute:
+
+        Unmutes a user by removing the "Muted" role.
+
+        Example: $unmute @User
+
+    $tempmute:
+
+        Temporarily mutes a user for a specified duration (in minutes).
+
+        Example: $tempmute @User 10 You violated the rules.
+
+    $announce:
+
+        Sends a club restart announcement as an embed to a specific channel.
+
+        Example: $announce 123456789012345678

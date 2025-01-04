@@ -1,0 +1,23 @@
+Poll Command ($poll):
+
+    Allows users to create polls with up to 10 options.
+
+    Example: $poll "Should we order pizza?" Yes No Maybe
+
+Custom Embed Command ($embed):
+
+    Sends a formatted embed message with a title, description, and optional color.
+
+    Example: $embed "Welcome!" "This is a welcome message." 0x00ff00
+
+Mute/Unmute Commands ($mute, $unmute, $tempmute):
+
+    Mutes or unmutes users by assigning/removing the "Muted" role.
+
+    Temporary mute: $tempmute @user 10 You broke the rules.
+
+Announcement Command ($announce):
+
+    Sends a club restart announcement as an embed in a specified channel.
+
+    Example: $announce 123456789012345678
