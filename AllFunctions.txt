@@ -45,9 +45,3 @@
         Temporarily mutes a user for a specified duration (in minutes).
 
         Example: $tempmute @User 10 You violated the rules.
-
-    $announce:
-
-        Sends a club restart announcement as an embed to a specific channel.
-
-        Example: $announce 123456789012345678
