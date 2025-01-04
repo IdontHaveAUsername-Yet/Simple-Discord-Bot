@@ -7,7 +7,7 @@ This is a Python-based Discord bot template that includes:
 
 ## Setup
 
-1. Clone this repository:
+1. Clone this repository(or just Download the Zip):
    ```bash
    git clone https://github.com/your-username/discord-bot-template.git
 2. Create a bot on the Discord Developer Portal and copy the bot token.
