@@ -12,6 +12,6 @@ This is a Python-based Discord bot template that includes:
    git clone https://github.com/your-username/discord-bot-template.git
 2. Create a bot on the Discord Developer Portal and copy the bot token.
 
-3. Replace YOUR_BOT_TOKEN in the .env file with your bot's token.
+3. Replace YOUR_BOT_TOKEN in the with your Token
 
 4. Run the bot: Python3 bot.py 
