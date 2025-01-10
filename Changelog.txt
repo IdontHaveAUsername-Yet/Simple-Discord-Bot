@@ -21,3 +21,6 @@ Announcement Command ($announce):
     Sends a club restart announcement as an embed in a specified channel.
 
     Example: $announce 123456789012345678
+
+Help Command ($help)
+    Shows you every command
