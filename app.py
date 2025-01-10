@@ -2,24 +2,32 @@ import discord
 from discord.ext import commands
 import asyncio
 
-#ADD YOUR TOKEN HERE
+# Replace with your bot token
 TOKEN = "YOUR_BOT_TOKEN_HERE"
+
+# Replace with your welcome/goodbye channel ID
+WELCOME_GOODBYE_CHANNEL_ID = 123456789012345678
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix="$", intents=intents)
+intents.members = True
+bot = commands.Bot(command_prefix="$", intents=intents, help_command=None)
 
 bad_words = [
     "idiot", "moron", "retard", "dumbass", "asshole", "arsehole", "asshat", "assclown",
     "son of a bitch", "bitch", "bastard", "motherfucker", "nigga", "nga", "nig", "n-word",
     "dickhead", "dick", "dickface", "dickwad", "cunt", "cuntface", "cuntbag", "shit",
     "shithead", "shitface", "fuck", "fucker", "fuckface", "fuckboy", "pussy", "puss",
-    "pussbag", "douchebag", "douche", "douchecanoe", "arschloch", "arsch", "arschgeige",
+    "pussbag", "douchebag", "douche", "douchecanoe", "fucktard", "fuckwit", "shitstain",
+    "scumbag", "twat", "wanker", "bellend", "knobhead", "knob", "tosser", "wankstain",
+    "fucknugget", "dipshit", "shitbag", "shitforbrains", "arschloch", "arsch", "arschgeige",
     "arschkrampe", "arschlecker", "hurensohn", "hurenkind", "hurentochter", "hurenbengel",
     "idiot", "idiotenkind", "vollidiot", "blödmann", "wichser", "wichsbeutel", "wichsgesicht",
     "trottel", "volltrottel", "dummkopf", "depp", "volldepp", "deppert", "scheiße",
     "scheißkerl", "scheißtyp", "mistkerl", "miststück", "mistvieh", "fotze", "fotzenkind",
-    "fotzengesicht", "schwanz", "schwanzlutscher", "schwanzkopf", "idiota", "imbécil",
+    "fotzengesicht", "schwanz", "schwanzlutscher", "schwanzkopf", "sackgesicht", "hirni",
+    "hirnlos", "spast", "spacko", "vollpfosten", "armleuchter", "dummbeutel", "sack",
+    "sackratte", "vollassi", "vollhonk", "vollspast", "volltussi", "idiota", "imbécil",
     "estúpido", "cabrón", "cabronazo", "cabroncete", "pendejo", "pendejada", "pendejete",
     "hijo de puta", "puta", "puto", "mierda", "mierdoso", "mierdero", "gilipollas",
     "gilipuertas", "gilipollismo", "coño", "coñazo", "coñito", "maricón", "marica",
@@ -68,11 +76,44 @@ async def on_message(message):
     if any(word in message.content.lower() for word in bad_words):
         await message.delete()
         try:
-            await message.author.send("Please avoid using inappropriate language.")
+            await message.author.send("No Bad Words :P")
         except discord.Forbidden:
             await message.channel.send(f"{message.author.mention}, please do not use bad words! (I couldn't send you a DM.)")
-
     await bot.process_commands(message)
+
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(WELCOME_GOODBYE_CHANNEL_ID)
+    if channel is None:
+        print("Welcome/Goodbye channel not found. Please check the channel ID.")
+        return
+
+    embed = discord.Embed(
+        title=f"Welcome to the server, {member.name}!",
+        description="We're excited to have you here. Please read the rules and enjoy your stay!",
+        color=0x00ff00
+    )
+    embed.set_thumbnail(url=member.avatar.url)
+    embed.set_footer(text=f"You are our {len(member.guild.members)}th member!")
+
+    await channel.send(embed=embed)
+
+@bot.event
+async def on_member_remove(member):
+    channel = bot.get_channel(WELCOME_GOODBYE_CHANNEL_ID)
+    if channel is None:
+        print("Welcome/Goodbye channel not found. Please check the channel ID.")
+        return
+
+    embed = discord.Embed(
+        title=f"Goodbye, {member.name}!",
+        description="We're sad to see you go. Take care and hope to see you again!",
+        color=0xff0000
+    )
+    embed.set_thumbnail(url=member.avatar.url)
+    embed.set_footer(text=f"We now have {len(member.guild.members)} members.")
+
+    await channel.send(embed=embed)
 
 @bot.command()
 @is_admin()
@@ -82,9 +123,32 @@ async def ban(ctx, member: discord.Member, *, reason="No reason provided"):
 
 @bot.command()
 @is_admin()
+async def unban(ctx, user_id: int):
+    try:
+        user = await bot.fetch_user(user_id)
+        await ctx.guild.unban(user)
+        await ctx.send(f"{user.name}#{user.discriminator} has been unbanned.")
+    except discord.NotFound:
+        await ctx.send("User not found in the ban list.")
+    except discord.Forbidden:
+        await ctx.send("I don't have permission to unban this user.")
+    except discord.HTTPException as e:
+        await ctx.send(f"An error occurred while trying to unban the user: {e}")
+
+@bot.command()
+@commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason="No reason provided"):
-    await member.kick(reason=reason)
-    await ctx.send(f"{member.mention} has been kicked. Reason: {reason}")
+    try:
+        if ctx.guild.me.top_role <= member.top_role:
+            await ctx.send(f"I cannot kick {member.mention} because they have a higher or equal role to me.")
+            return
+
+        await member.kick(reason=reason)
+        await ctx.send(f"{member.mention} has been kicked. Reason: {reason}")
+    except discord.Forbidden:
+        await ctx.send("I don't have permission to kick this user.")
+    except discord.HTTPException as e:
+        await ctx.send(f"An error occurred while trying to kick the user: {e}")
 
 @bot.command()
 @is_admin()
@@ -160,56 +224,26 @@ async def tempmute(ctx, member: discord.Member, duration: int, *, reason="No rea
     await member.remove_roles(muted_role)
     await ctx.send(f"{member.mention} has been unmuted after {duration} minutes.")
 
-@ban.error
-async def ban_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("You do not have permission to use this command.")
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("You must mention a user to ban them.")
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(
+        title="Bot Commands",
+        description="Here is a list of all available commands and their functions:",
+        color=0x00ff00
+    )
 
-@kick.error
-async def kick_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("You do not have permission to use this command.")
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("You must mention a user to kick them.")
+    embed.add_field(name="$help", value="Displays this help message with all available commands.", inline=False)
+    embed.add_field(name="$ban @user [reason]", value="Bans a user from the server. (Admin only)", inline=False)
+    embed.add_field(name="$unban user_id", value="Unbans a user by their ID. (Admin only)", inline=False)
+    embed.add_field(name="$kick @user [reason]", value="Kicks a user from the server. (Admin only)", inline=False)
+    embed.add_field(name="$mute @user [reason]", value="Mutes a user. (Admin only)", inline=False)
+    embed.add_field(name="$unmute @user", value="Unmutes a user. (Admin only)", inline=False)
+    embed.add_field(name="$tempmute @user duration_in_minutes [reason]", value="Temporarily mutes a user for a specified duration. (Admin only)", inline=False)
+    embed.add_field(name="$poll 'question' 'option1' 'option2' ...", value="Creates a poll with up to 10 options.", inline=False)
+    embed.add_field(name="$embed 'title' 'description' [color]", value="Sends a custom embed message. Color is optional (e.g., 0x00ff00 for green).", inline=False)
+    embed.add_field(name="$write channel_id 'message'", value="Sends a message to a specific channel. (Admin only)", inline=False)
 
-@write.error
-async def write_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("You do not have permission to use this command.")
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Usage: $write CHANNEL_ID \"Your message\"")
-
-@poll.error
-async def poll_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Usage: $poll \"Question\" \"Option 1\" \"Option 2\" ...")
-
-@embed.error
-async def embed_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Usage: $embed \"Title\" \"Description\" [color]")
-
-@mute.error
-async def mute_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("You do not have permission to use this command.")
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("You must mention a user to mute them.")
-
-@unmute.error
-async def unmute_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("You do not have permission to use this command.")
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("You must mention a user to unmute them.")
-
-@tempmute.error
-async def tempmute_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        await ctx.send("You do not have permission to use this command.")
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Usage: $tempmute @user DURATION_IN_MINUTES [reason]")
+    embed.set_footer(text="Use commands responsibly!")
+    await ctx.send(embed=embed)
 
 bot.run(TOKEN)
