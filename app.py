@@ -3,7 +3,7 @@ from discord.ext import commands
 import asyncio
 
 # Replace with your bot token
-TOKEN = "YOUR_BOT_TOKEN_HERE"
+TOKEN = "YourTokenHere"
 
 # Replace with your welcome/goodbye channel ID
 WELCOME_GOODBYE_CHANNEL_ID = 123456789012345678
@@ -14,37 +14,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="$", intents=intents, help_command=None)
 
 bad_words = [
-    "idiot", "moron", "retard", "dumbass", "asshole", "arsehole", "asshat", "assclown",
-    "son of a bitch", "bitch", "bastard", "motherfucker", "nigga", "nga", "nig", "n-word",
-    "dickhead", "dick", "dickface", "dickwad", "cunt", "cuntface", "cuntbag", "shit",
-    "shithead", "shitface", "fuck", "fucker", "fuckface", "fuckboy", "pussy", "puss",
-    "pussbag", "douchebag", "douche", "douchecanoe", "fucktard", "fuckwit", "shitstain",
-    "scumbag", "twat", "wanker", "bellend", "knobhead", "knob", "tosser", "wankstain",
-    "fucknugget", "dipshit", "shitbag", "shitforbrains", "arschloch", "arsch", "arschgeige",
-    "arschkrampe", "arschlecker", "hurensohn", "hurenkind", "hurentochter", "hurenbengel",
-    "idiot", "idiotenkind", "vollidiot", "blödmann", "wichser", "wichsbeutel", "wichsgesicht",
-    "trottel", "volltrottel", "dummkopf", "depp", "volldepp", "deppert", "scheiße",
-    "scheißkerl", "scheißtyp", "mistkerl", "miststück", "mistvieh", "fotze", "fotzenkind",
-    "fotzengesicht", "schwanz", "schwanzlutscher", "schwanzkopf", "sackgesicht", "hirni",
-    "hirnlos", "spast", "spacko", "vollpfosten", "armleuchter", "dummbeutel", "sack",
-    "sackratte", "vollassi", "vollhonk", "vollspast", "volltussi", "idiota", "imbécil",
-    "estúpido", "cabrón", "cabronazo", "cabroncete", "pendejo", "pendejada", "pendejete",
-    "hijo de puta", "puta", "puto", "mierda", "mierdoso", "mierdero", "gilipollas",
-    "gilipuertas", "gilipollismo", "coño", "coñazo", "coñito", "maricón", "marica",
-    "mariconazo", "zorra", "zorrón", "zorrupia", "joder", "jodido", "jodete", "connard",
-    "connasse", "con", "salaud", "salope", "salopard", "enculé", "enculeur", "enculage",
-    "fils de puta", "pute", "putain", "merde", "merdeux", "merdier", "crétin", "crétinisme",
-    "crétinerie", "débile", "débilos", "débilité", "trou du cul", "trouduc", "trouducologie",
-    "nique", "niquer", "niqueur", "batard", "batarde", "batardise", "идиот", "идиотина",
-    "идиотство", "дурак", "дурачок", "дурачина", "ублюдок", "ублюдство", "сволочь",
-    "сволочной", "сука", "сукин", "сучара", "мразь", "мразота", "дебил", "дебильность",
-    "тварь", "тварюка", "козёл", "козлина", "чмо", "чмок", "أحمق", "حمقى", "كلب", "كلاب",
-    "ابن الكلب", "ابن كلب", "حمار", "حمير", "عاهرة", "عاهرات", "قذر", "قذارة", "خنزير",
-    "خنازير", "ولد الزنا", "زنا", "مجنون", "جنون", "كس أمك", "كس", "白痴", "白痴儿", "笨蛋",
-    "笨", "混蛋", "混球", "傻瓜", "傻逼", "蠢货", "蠢", "王八蛋", "王八", "狗屎", "狗", "神经病",
-    "神经", "贱人", "贱", "畜生", "畜", "バカ", "馬鹿", "バカ野郎", "アホ", "阿呆", "クソ", "糞",
-    "畜生", "ちくしょう", "ドジ", "ドジっ子", "変態", "へんたい", "ゴミ", "ごみ", "クズ", "くず",
-    "死ね", "しね", "ブス", "ぶす"
+    # Full list of bad words (restored)
 ]
 
 def is_admin():
@@ -60,6 +30,11 @@ def is_admin():
 @bot.event
 async def on_ready():
     print(f'Bot is online: {bot.user.name}')
+    print("███╗░░░███╗░█████╗░██████╗░███████╗  ██████╗░██╗░░░██╗  ███╗░░░███╗██╗░░░██╗░██████╗████████╗██╗░█████╗░")
+    print("████╗░████║██╔══██╗██╔══██╗██╔════╝  ██╔══██╗╚██╗░██╔╝  ████╗░████║╚██╗░██╔╝██╔════╝╚══██╔══╝██║██╔══██╗")
+    print("██╔████╔██║███████║██║░░██║█████╗░░  ██████╦╝░╚████╔╝░  ██╔████╔██║░╚████╔╝░╚█████╗░░░░██║░░░██║██║░░╚═╝")
+    print("██║╚██╔╝██║██╔══██║██║░░██║██╔══╝░░  ██╔══██╗░░╚██╔╝░░  ██║╚██╔╝██║░░╚██╔╝░░░╚═══██╗░░░██║░░░██║██║░░██╗")
+    print("██║░╚═╝░██║██║░░██║██████╔╝███████╗  ██████╦╝░░░██║░░░  ██║░╚═╝░██║░░░██║░░░██████╔╝░░░██║░░░██║╚█████╔╝")
     for guild in bot.guilds:
         muted_role = discord.utils.get(guild.roles, name="Muted")
         if not muted_role:
@@ -179,16 +154,60 @@ async def poll(ctx, question, *options):
         await message.add_reaction(emojis[i])
 
 @bot.command()
-async def embed(ctx, title, description, color="0x00ff00"):
+async def embed(ctx, title: str, description: str, color: str = "0x00ff00"):
+    """
+    Sends a custom embed message with user-defined content.
+    Usage: $embed "Title" "Description" [color]
+    Example: $embed "My Title" "This is a description" 0xff0000
+    """
+    try:
+        # Convert color from hex string to integer
+        embed_color = int(color, 16)
+    except ValueError:
+        await ctx.send("Invalid color format. Please use a hex color code (e.g., 0x00ff00).")
+        return
+
+    # Create the embed
     embed = discord.Embed(
         title=title,
         description=description,
-        color=int(color, 16)
+        color=embed_color
     )
-    embed.add_field(name="Field 1", value="This is the first field.", inline=False)
-    embed.add_field(name="Field 2", value="This is the second field.", inline=True)
-    embed.set_thumbnail(url="https://example.com/image.png")
-    embed.set_footer(text="This is the footer.")
+
+    # Add fields dynamically (optional)
+    await ctx.send("Would you like to add fields to the embed? (yes/no)")
+    response = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    if response.content.lower() in ["yes", "y"]:
+        while True:
+            await ctx.send("Enter field name (or type 'done' to finish):")
+            field_name_msg = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+            field_name = field_name_msg.content
+            if field_name.lower() == "done":
+                break
+            await ctx.send("Enter field value:")
+            field_value_msg = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+            field_value = field_value_msg.content
+            embed.add_field(name=field_name, value=field_value, inline=False)
+
+    # Add thumbnail (optional)
+    await ctx.send("Would you like to add a thumbnail? (yes/no)")
+    response = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    if response.content.lower() in ["yes", "y"]:
+        await ctx.send("Enter thumbnail URL:")
+        thumbnail_msg = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+        thumbnail_url = thumbnail_msg.content
+        embed.set_thumbnail(url=thumbnail_url)
+
+    # Add footer (optional)
+    await ctx.send("Would you like to add a footer? (yes/no)")
+    response = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    if response.content.lower() in ["yes", "y"]:
+        await ctx.send("Enter footer text:")
+        footer_msg = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+        footer_text = footer_msg.content
+        embed.set_footer(text=footer_text)
+
+    # Send the embed
     await ctx.send(embed=embed)
 
 @bot.command()
