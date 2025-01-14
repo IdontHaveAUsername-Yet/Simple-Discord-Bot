@@ -13,7 +13,7 @@ This is a Python-based Discord bot template that includes:
 
 1. Clone this repository(or just Download the Zip :P ):
    ```bash
-   git clone https://github.com/your-username/discord-bot-template.git
+   git clone https://github.com/IdontHaveAUsername-Yet/Simple-Discord-Bot/.git
 2. Create a bot on the Discord Developer Portal and copy the bot token.
 
 3. Replace YOUR_BOT_TOKEN in the with your Token
