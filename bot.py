@@ -14,7 +14,37 @@ intents.members = True
 bot = commands.Bot(command_prefix="$", intents=intents, help_command=None)
 
 bad_words = [
-    # Full list of bad words (restored)
+    "idiot", "moron", "retard", "dumbass", "asshole", "arsehole", "asshat", "assclown",
+    "son of a bitch", "bitch", "bastard", "motherfucker", "nigga", "nga", "nig", "n-word",
+    "dickhead", "dick", "dickface", "dickwad", "cunt", "cuntface", "cuntbag", "shit",
+    "shithead", "shitface", "fuck", "fucker", "fuckface", "fuckboy", "pussy", "puss",
+    "pussbag", "douchebag", "douche", "douchecanoe", "fucktard", "fuckwit", "shitstain",
+    "scumbag", "twat", "wanker", "bellend", "knobhead", "knob", "tosser", "wankstain",
+    "fucknugget", "dipshit", "shitbag", "shitforbrains", "arschloch", "arsch", "arschgeige",
+    "arschkrampe", "arschlecker", "hurensohn", "hurenkind", "hurentochter", "hurenbengel",
+    "idiot", "idiotenkind", "vollidiot", "blödmann", "wichser", "wichsbeutel", "wichsgesicht",
+    "trottel", "volltrottel", "dummkopf", "depp", "volldepp", "deppert", "scheiße",
+    "scheißkerl", "scheißtyp", "mistkerl", "miststück", "mistvieh", "fotze", "fotzenkind",
+    "fotzengesicht", "schwanz", "schwanzlutscher", "schwanzkopf", "sackgesicht", "hirni",
+    "hirnlos", "spast", "spacko", "vollpfosten", "armleuchter", "dummbeutel", "sack",
+    "sackratte", "vollassi", "vollhonk", "vollspast", "volltussi", "idiota", "imbécil",
+    "estúpido", "cabrón", "cabronazo", "cabroncete", "pendejo", "pendejada", "pendejete",
+    "hijo de puta", "puta", "puto", "mierda", "mierdoso", "mierdero", "gilipollas",
+    "gilipuertas", "gilipollismo", "coño", "coñazo", "coñito", "maricón", "marica",
+    "mariconazo", "zorra", "zorrón", "zorrupia", "joder", "jodido", "jodete", "connard",
+    "connasse", "con", "salaud", "salope", "salopard", "enculé", "enculeur", "enculage",
+    "fils de puta", "pute", "putain", "merde", "merdeux", "merdier", "crétin", "crétinisme",
+    "crétinerie", "débile", "débilos", "débilité", "trou du cul", "trouduc", "trouducologie",
+    "nique", "niquer", "niqueur", "batard", "batarde", "batardise", "идиот", "идиотина",
+    "идиотство", "дурак", "дурачок", "дурачина", "ублюдок", "ублюдство", "сволочь",
+    "сволочной", "сука", "сукин", "сучара", "мразь", "мразота", "дебил", "дебильность",
+    "тварь", "тварюка", "козёл", "козлина", "чмо", "чмок", "أحمق", "حمقى", "كلب", "كلاب",
+    "ابن الكلب", "ابن كلب", "حمار", "حمير", "عاهرة", "عاهرات", "قذر", "قذارة", "خنزير",
+    "خنازير", "ولد الزنا", "زنا", "مجنون", "جنون", "كس أمك", "كس", "白痴", "白痴儿", "笨蛋",
+    "笨", "混蛋", "混球", "傻瓜", "傻逼", "蠢货", "蠢", "王八蛋", "王八", "狗屎", "狗", "神经病",
+    "神经", "贱人", "贱", "畜生", "畜", "バカ", "馬鹿", "バカ野郎", "アホ", "阿呆", "クソ", "糞",
+    "畜生", "ちくしょう", "ドジ", "ドジっ子", "変態", "へんたい", "ゴミ", "ごみ", "クズ", "くず",
+    "死ね", "しね", "ブス", "ぶす"
 ]
 
 def is_admin():
