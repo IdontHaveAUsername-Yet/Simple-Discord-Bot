@@ -6,7 +6,7 @@ import asyncio
 TOKEN = "YourTokenHere"
 
 # Replace with your welcome/goodbye channel ID
-WELCOME_GOODBYE_CHANNEL_ID = 123456789012345678
+WELCOME_GOODBYE_CHANNEL_ID = "Your channel id goes here and quotation marks :P"
 
 intents = discord.Intents.default()
 intents.message_content = True
